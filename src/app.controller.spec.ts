@@ -14,6 +14,7 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
+  //Unit testing for App Controller
   describe('root', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hello World!');
