@@ -3,6 +3,9 @@
 /node_modules
 /build
 
+# Auth Secret
+/src/auth/constants.ts
+
 # Logs
 logs
 *.log
