@@ -1,8 +1,16 @@
-import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 
-/* Receive the username and password in the request body, 
-then return a JWT token if the user is authenticated */
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -11,5 +19,11 @@ export class AuthController {
   @Post('login')
   signIn(@Body() signInDto: Record<string, any>) {
     return this.authService.signIn(signInDto.username, signInDto.password);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
